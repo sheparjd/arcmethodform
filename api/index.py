@@ -50,7 +50,7 @@ def handle_form():
         cur = conn.cursor()
         
         insert_query = """
-            INSERT INTO website_leads (first_name, last_name, email, phone_number, concern)
+            INSERT INTO website_leads (first_name, last_name, email, phone, concern)
             VALUES (%s, %s, %s, %s, %s);
         """
         cur.execute(insert_query, (first_name, last_name, email, phone, concern))
