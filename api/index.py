@@ -42,7 +42,7 @@ def handle_form():
 
         # Database Insertion
         # Vercel retrieves the Connection String securely from environment variables
-        db_url = os.environ.get("DATABASE_URL")
+        db_url = os.environ.get("https://ep-summer-sky-bdw48wt6.apirest.c-8.us-east-2.aws.neon.tech/neondb/rest/v1")
         if not db_url:
             return jsonify({"error": "Database environment link missing."}), 500
 
