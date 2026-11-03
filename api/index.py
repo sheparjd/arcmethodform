@@ -51,7 +51,7 @@ def handle_form():
         
         insert_query = """
             INSERT INTO website_leads (first_name, last_name, email, phone_number, concern)
-            VALUES (%s, %s, %s, phone, %s);
+            VALUES (%s, %s, %s, %s, %s);
         """
         cur.execute(insert_query, (first_name, last_name, email, phone, concern))
         conn.commit()
