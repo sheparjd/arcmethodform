@@ -4,56 +4,161 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Support</title>
-    <script src="https://tailwindcss.com"></script>
+    <!-- Standard CSS Fallback for reliable cross-domain rendering -->
+    <style>
+        body {
+            background-color: #f9fafb;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 3rem 1rem;
+            box-sizing: border-box;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+        .form-container {
+            max-width: 28rem;
+            width: 100%;
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f3f4f6;
+        }
+        .form-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .form-header h2 {
+            font-size: 1.875rem;
+            font-weight: 800;
+            color: #111827;
+            margin: 0 0 0.5rem 0;
+            letter-tight: -0.025em;
+        }
+        .form-header p {
+            font-size: 0.875rem;
+            color: #4b5563;
+            margin: 0;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+        @media (min-width: 640px) {
+            .grid-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        .form-group label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 0.625rem 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            background-color: #ffffff;
+            color: #111827;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        .submit-btn {
+            width: 100%;
+            display: inline-flex;
+            justify-content: center;
+            padding: 0.625rem 1rem;
+            border: 1px solid transparent;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #ffffff;
+            background-color: #4f46e5;
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: background-color 0.15s ease;
+        }
+        .submit-btn:hover {
+            background-color: #4338ca;
+        }
+        .submit-btn:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+        .msg-box {
+            font-size: 0.875rem;
+            text-align: center;
+            font-weight: 500;
+            margin-top: 1rem;
+            display: none;
+        }
+        .msg-success {
+            color: #16a34a;
+        }
+        .msg-error {
+            color: #dc2626;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 flex items-center justify-center min-height-screen py-12 px-4 sm:px-6 lg:px-8">
-    <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-md border border-gray-100">
-        <div>
-            <h2 class="text-center text-3xl font-extrabold text-gray-900 tracking-tight">Get in Touch</h2>
-            <p class="mt-2 text-center text-sm text-gray-600">Please fill out the form below and our team will follow up shortly.</p>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h2>Get in Touch</h2>
+            <p>Please fill out the form below and our team will follow up shortly.</p>
         </div>
         
-        <form id="leadForm" class="mt-8 space-y-6">
-            <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
-                <div>
-                    <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
-                    <input type="text" id="first_name" name="first_name" required autocomplete="given-name"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        <form id="leadForm">
+            <div class="grid-2">
+                <div class="form-group">
+                    <label for="first_name">First name</label>
+                    <input type="text" id="first_name" name="first_name" required autocomplete="given-name">
                 </div>
 
-                <div>
-                    <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>
-                    <input type="text" id="last_name" name="last_name" required autocomplete="family-name"
-                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                <div class="form-group">
+                    <label for="last_name">Last name</label>
+                    <input type="text" id="last_name" name="last_name" required autocomplete="family-name">
                 </div>
             </div>
 
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
-                <input type="email" id="email" name="email" required autocomplete="email"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" required autocomplete="email">
             </div>
 
-            <div>
-                <label for="phone" class="block text-sm font-medium text-gray-700">Phone number</label>
-                <input type="tel" id="phone" name="phone" required autocomplete="tel"
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="tel" id="phone" name="phone" required autocomplete="tel">
             </div>
 
-            <div>
-                <label for="concern" class="block text-sm font-medium text-gray-700">What concern can we help you with?</label>
-                <textarea id="concern" name="concern" rows="4" required
-                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+            <div class="form-group">
+                <label for="concern">What concern can we help you with?</label>
+                <textarea id="concern" name="concern" rows="4" required></textarea>
             </div>
 
-            <div>
-                <button type="submit" id="submitBtn"
-                    class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150">
-                    Submit Request
-                </button>
-            </div>
+            <button type="submit" id="submitBtn" class="submit-btn">
+                Submit Request
+            </button>
             
-            <div id="responseMessage" class="hidden text-sm text-center font-medium mt-4"></div>
+            <div id="responseMessage" class="msg-box"></div>
         </form>
     </div>
 
@@ -66,7 +171,7 @@
             
             submitBtn.disabled = true;
             submitBtn.textContent = 'Processing...';
-            msgBox.classList.add('hidden');
+            msgBox.style.display = 'none';
 
             const formData = {
                 first_name: document.getElementById('first_name').value,
@@ -85,17 +190,17 @@
                 
                 const result = await response.json();
                 
-                msgBox.classList.remove('hidden');
+                msgBox.style.display = 'block';
                 if (response.ok) {
-                    msgBox.className = "text-sm text-center font-medium mt-4 text-green-600";
+                    msgBox.className = "msg-box msg-success";
                     msgBox.textContent = "Thank you! Your request has been submitted.";
                     document.getElementById('leadForm').reset();
                 } else {
                     throw new Error(result.error || "Submission failed.");
                 }
             } catch (error) {
-                msgBox.classList.remove('hidden');
-                msgBox.className = "text-sm text-center font-medium mt-4 text-red-600";
+                msgBox.style.display = 'block';
+                msgBox.className = "msg-box msg-error";
                 msgBox.textContent = error.message || "An unexpected error occurred.";
             } finally {
                 submitBtn.disabled = false;
