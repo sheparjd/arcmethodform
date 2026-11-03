@@ -1,62 +1,107 @@
-<div id="lead-form-container" style="max-width: 480px; margin: 0 auto; font-family: system-ui, -apple-system, sans-serif; background: #f9fafb; padding: 24px; border-radius: 12px; border: 1px solid #e5e7eb;">
-  <h3 style="margin-top: 0; color: #111827; font-size: 1.25rem;">How can we help you?</h3>
-  <form id="dynamicLeadForm">
-    <div style="margin-bottom: 12px;">
-      <label style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151; margin-bottom: 4px;">First Name *</label>
-      <input type="text" name="first_name" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">
-    </div>
-    <div style="margin-bottom: 12px;">
-      <label style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151; margin-bottom: 4px;">Last Name</label>
-      <input type="text" name="last_name" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">
-    </div>
-    <div style="margin-bottom: 12px;">
-      <label style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151; margin-bottom: 4px;">Phone Number</label>
-      <input type="tel" name="phone_number" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">
-    </div>
-    <div style="margin-bottom: 12px;">
-      <label style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151; margin-bottom: 4px;">Email Address *</label>
-      <input type="email" name="email" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;">
-    </div>
-    <div style="margin-bottom: 16px;">
-      <label style="display: block; font-size: 0.875rem; font-weight: 600; color: #374151; margin-bottom: 4px;">What concern can we help you with? *</label>
-      <textarea name="concern" rows="4" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; box-sizing: border-box;"></textarea>
-    </div>
-    <button type="submit" style="width: 100%; background-color: #2563eb; color: white; border: none; padding: 12px; border-radius: 6px; font-weight: 600; cursor: pointer;">Submit Inquiry</button>
-  </form>
-  <div id="formResponse" style="margin-top: 12px; font-size: 0.875rem; text-align: center;"></div>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Support</title>
+    <script src="https://tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-height-screen py-12 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-xl shadow-md border border-gray-100">
+        <div>
+            <h2 class="text-center text-3xl font-extrabold text-gray-900 tracking-tight">Get in Touch</h2>
+            <p class="mt-2 text-center text-sm text-gray-600">Please fill out the form below and our team will follow up shortly.</p>
+        </div>
+        
+        <form id="leadForm" class="mt-8 space-y-6">
+            <div class="grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+                <div>
+                    <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
+                    <input type="text" id="first_name" name="first_name" required autocomplete="given-name"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
 
-<script>
-document.getElementById('dynamicLeadForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const responseDiv = document.getElementById('formResponse');
-  const formData = Object.fromEntries(new FormData(this).entries());
+                <div>
+                    <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>
+                    <input type="text" id="last_name" name="last_name" required autocomplete="family-name"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+            </div>
 
-  // REPLACE with your actual PythonAnywhere Flask endpoint URL
-  const API_URL = 'https://ep-summer-sky-bdw48wt6.apirest.c-8.us-east-2.aws.neon.tech/neondb/rest/v1';
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+                <input type="email" id="email" name="email" required autocomplete="email"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
 
-  try {
-    responseDiv.style.color = '#4b5563';
-    responseDiv.textContent = 'Sending...';
+            <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700">Phone number</label>
+                <input type="tel" id="phone" name="phone" required autocomplete="tel"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
 
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData)
-    });
+            <div>
+                <label for="concern" class="block text-sm font-medium text-gray-700">What concern can we help you with?</label>
+                <textarea id="concern" name="concern" rows="4" required
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"></textarea>
+            </div>
 
-    const result = await res.json();
-    if (res.ok) {
-      responseDiv.style.color = '#16a34a';
-      responseDiv.textContent = 'Thank you! Your message has been sent.';
-      this.reset();
-    } else {
-      responseDiv.style.color = '#dc2626';
-      responseDiv.textContent = result.error || 'Something went wrong.';
-    }
-  } catch (err) {
-    responseDiv.style.color = '#dc2626';
-    responseDiv.textContent = 'Failed to connect to the server.';
-  }
-});
-</script>
+            <div>
+                <button type="submit" id="submitBtn"
+                    class="w-full flex justify-center py-2.5 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition duration-150">
+                    Submit Request
+                </button>
+            </div>
+            
+            <div id="responseMessage" class="hidden text-sm text-center font-medium mt-4"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('leadForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const msgBox = document.getElementById('responseMessage');
+            
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Processing...';
+            msgBox.classList.add('hidden');
+
+            const formData = {
+                first_name: document.getElementById('first_name').value,
+                last_name: document.getElementById('last_name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                concern: document.getElementById('concern').value
+            };
+
+            try {
+                const response = await fetch('/api/submit', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                const result = await response.json();
+                
+                msgBox.classList.remove('hidden');
+                if (response.ok) {
+                    msgBox.className = "text-sm text-center font-medium mt-4 text-green-600";
+                    msgBox.textContent = "Thank you! Your request has been submitted.";
+                    document.getElementById('leadForm').reset();
+                } else {
+                    throw new Error(result.error || "Submission failed.");
+                }
+            } catch (error) {
+                msgBox.classList.remove('hidden');
+                msgBox.className = "text-sm text-center font-medium mt-4 text-red-600";
+                msgBox.textContent = error.message || "An unexpected error occurred.";
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Request';
+            }
+        });
+    </script>
+</body>
+</html>
